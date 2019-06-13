@@ -3,12 +3,12 @@ package com.cki.Kairos.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-
 
 @Entity
 @Table(name = "User")
@@ -37,7 +37,7 @@ public class User {
 	@Column(name = "occupation")
 	private String occupation;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "address_Id")
 	private Address address;
 
@@ -102,7 +102,7 @@ public class User {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", cellPhone=" + cellPhone + ", occupation=" + occupation + ", address=" + address + "]";
 	}
-	
+
 	public static class UserBuilder {
 
 		private int userId;
@@ -117,7 +117,7 @@ public class User {
 			this.userId = userId;
 			return this;
 		}
-		
+
 		public UserBuilder setFirstName(String firstName) {
 			this.firstName = firstName;
 			return this;
@@ -142,7 +142,7 @@ public class User {
 			this.occupation = occupation;
 			return this;
 		}
-		
+
 		public UserBuilder setAddress(Address address) {
 			this.address = address;
 			return this;
@@ -151,7 +151,7 @@ public class User {
 		public User build() {
 
 			User user = new User();
-			
+
 			user.setUserId(userId);
 			user.setFirstName(firstName);
 			user.setLastName(lastName);

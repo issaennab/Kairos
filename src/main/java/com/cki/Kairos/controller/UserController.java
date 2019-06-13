@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,7 +58,7 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 
-	@PostMapping("/create")
+	@PostMapping("")
 	public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
 
 		try {
@@ -67,12 +69,36 @@ public class UserController {
 
 		} catch (Exception e) {
 
-			System.out.println("Couldn't create user");
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
+	@PutMapping("")
+	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+
+		try {
+			User user = UserConvertor.fromDto(userDto);
+			User updatedUser = userService.updateUser(user);
+			
+			return new ResponseEntity<>(UserConvertor.toDto(updatedUser), HttpStatus.ACCEPTED);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<String> deleteUser(@PathVariable(name = "userId") int userId) {
+		
+		// proper validation need to be added here
+		userService.deleteUser(userId);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+		
+		
+	}
+	
 	@GetMapping("/allAddresses")
 	public Iterable<Address> findAllAddresses() {
 		return userService.getAllAddresses();

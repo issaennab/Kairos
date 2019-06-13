@@ -25,7 +25,7 @@ CREATE TABLE User (
   email VARCHAR(100) NOT NULL,
   cell VARCHAR(14) DEFAULT NULL,
   occupation VARCHAR(100) DEFAULT NULL,
-  address_Id INT NOT NULL,
+  address_Id INT DEFAULT NULL,
   FOREIGN KEY (address_Id) REFERENCES Address (address_Id)
 );
  

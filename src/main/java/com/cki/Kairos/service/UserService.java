@@ -57,4 +57,20 @@ public class UserService {
 		return addressRepository.findByAddressId(id);
 	}
 
+	public User updateUser(User user) {
+		
+		if (isUserExist(user)) {
+			return userRepository.save(user);
+		}
+		throw new InvalidParameterException("User not found!");
+		
+	}
+
+	public void deleteUser(int userId) {
+		
+		User user = getUser(userId);
+		userRepository.delete(user);
+		
+	}
+
 }
