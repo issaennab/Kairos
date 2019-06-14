@@ -1,4 +1,4 @@
-package com.cki.Kairos.controller;
+package com.cki.kairos.profile.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cki.Kairos.dto.UserDto;
-import com.cki.Kairos.model.Address;
-import com.cki.Kairos.model.User;
-import com.cki.Kairos.service.UserService;
-import com.cki.Kairos.util.UserConvertor;
+import com.cki.kairos.profile.dto.UserDto;
+import com.cki.kairos.profile.model.Address;
+import com.cki.kairos.profile.model.User;
+import com.cki.kairos.profile.service.UserService;
+import com.cki.kairos.profile.util.UserConvertor;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,7 +37,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@ApiOperation(value = "View a user by Id", response = Iterable.class)
+	@ApiOperation(value = "Get a user by Id", response = Iterable.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved a User"),
 			@ApiResponse(code = 500, message = "You are not authorized to view the resource"),
 			@ApiResponse(code = 503, message = "Accessing the resource you were trying to reach is down"),
@@ -53,11 +53,13 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "List All Users", response = Iterable.class)
 	@GetMapping("/listAll")
 	public Iterable<User> findAllUsers() {
 		return userService.getAllUsers();
 	}
 
+	@ApiOperation(value = "Create a new user", response = Iterable.class)
 	@PostMapping("")
 	public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
 
@@ -74,6 +76,7 @@ public class UserController {
 		}
 	}
 
+	@ApiOperation(value = "Update an existing user", response = Iterable.class)
 	@PutMapping("")
 	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
 
@@ -89,6 +92,7 @@ public class UserController {
 		}
 	}
 	
+	@ApiOperation(value = "Delete an existing user by Id", response = Iterable.class)
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<String> deleteUser(@PathVariable(name = "userId") int userId) {
 		
@@ -99,6 +103,7 @@ public class UserController {
 		
 	}
 	
+	@ApiOperation(value = "List all address", response = Iterable.class)
 	@GetMapping("/allAddresses")
 	public Iterable<Address> findAllAddresses() {
 		return userService.getAllAddresses();

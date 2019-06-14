@@ -1,4 +1,4 @@
-package com.cki.Kairos.dto;
+package com.cki.kairos.profile.dto;
 
 public class AddressDto {
 

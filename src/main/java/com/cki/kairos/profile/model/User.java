@@ -1,4 +1,4 @@
-package com.cki.Kairos.model;
+package com.cki.kairos.profile.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

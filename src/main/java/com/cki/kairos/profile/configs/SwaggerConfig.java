@@ -1,4 +1,4 @@
-package com.cki.Kairos.configs;
+package com.cki.kairos.profile.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 	@Bean
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.cki.Kairos.controller")).paths(regex("/api.*")).build()
+				.apis(RequestHandlerSelectors.basePackage("com.cki.kairos.profile.controller")).paths(regex("/api.*")).build()
 				.apiInfo(metaData());
 	}
 

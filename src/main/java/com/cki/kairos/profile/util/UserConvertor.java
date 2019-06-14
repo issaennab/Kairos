@@ -1,8 +1,8 @@
-package com.cki.Kairos.util;
+package com.cki.kairos.profile.util;
 
-import com.cki.Kairos.dto.UserDto;
-import com.cki.Kairos.model.Address;
-import com.cki.Kairos.model.User;
+import com.cki.kairos.profile.dto.UserDto;
+import com.cki.kairos.profile.model.Address;
+import com.cki.kairos.profile.model.User;
 
 public class UserConvertor {
 
@@ -16,13 +16,13 @@ public class UserConvertor {
 		User user = new User.UserBuilder().setUserId(userDto.getUserId()).setFirstName(userDto.getFirstName())
 				.setLastName(userDto.getLastName()).setCellPhone(userDto.getCellPhone()).setEmail(userDto.getEmail())
 				.setOccupation(userDto.getOccupation())
-				.setAddress(
+				.setAddress(userDto.getAddress() != null ?
 						new Address.AddressBuilder().setAddressId(userDto.getAddress().getAddressId())
 						.setStreet(userDto.getAddress().getStreet())
 						.setCity(userDto.getAddress().getCity())
 						.setState(userDto.getAddress().getState())
 						.setPostalCode(userDto.getAddress().getPostalCode())
-						.build()
+						.build() : null
 						)
 				.build();
 

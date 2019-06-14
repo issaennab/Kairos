@@ -1,14 +1,14 @@
-package com.cki.Kairos.service;
+package com.cki.kairos.profile.service;
 
 import java.security.InvalidParameterException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cki.Kairos.model.Address;
-import com.cki.Kairos.model.User;
-import com.cki.Kairos.repository.AddressRepository;
-import com.cki.Kairos.repository.UserRepository;
+import com.cki.kairos.profile.model.Address;
+import com.cki.kairos.profile.model.User;
+import com.cki.kairos.profile.repository.AddressRepository;
+import com.cki.kairos.profile.repository.UserRepository;
 
 @Service
 public class UserService {

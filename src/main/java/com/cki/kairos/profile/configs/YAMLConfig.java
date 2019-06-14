@@ -1,4 +1,4 @@
-package com.cki.Kairos.configs;
+package com.cki.kairos.profile.configs;
 
 import java.util.ArrayList;
 import java.util.List;

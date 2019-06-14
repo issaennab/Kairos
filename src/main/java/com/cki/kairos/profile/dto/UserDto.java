@@ -1,6 +1,6 @@
-package com.cki.Kairos.dto;
+package com.cki.kairos.profile.dto;
 
-import com.cki.Kairos.model.Address;
+import com.cki.kairos.profile.model.Address;
 
 public class UserDto {
 
