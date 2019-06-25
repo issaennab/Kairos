@@ -6,6 +6,6 @@ import com.cki.kairos.profile.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	User findByUserId(int id);
-
+	User findByUserId(int userId);
+	
 }

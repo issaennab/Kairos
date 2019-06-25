@@ -1,13 +1,9 @@
 package com.cki.kairos.profile.service;
 
-import java.security.InvalidParameterException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cki.kairos.profile.model.Address;
 import com.cki.kairos.profile.model.User;
-import com.cki.kairos.profile.repository.AddressRepository;
 import com.cki.kairos.profile.repository.UserRepository;
 
 @Service
@@ -16,61 +12,13 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 
-	@Autowired
-	AddressRepository addressRepository;
-
-	/**
-	 * 
-	 * @param id identifier of the user to find
-	 * @return user instance if a match is found, null otherwise
-	 */
-	public User getUser(int id) {
-		return userRepository.findByUserId(id);
+	public User getUser(int userId) {
+		return userRepository.findByUserId(userId);
 	}
 
 	public Iterable<User> getAllUsers() {
 		return userRepository.findAll();
 	}
-
-	public Iterable<Address> getAllAddresses() {
-		return addressRepository.findAll();
-	}
-
-	public User createUser(User user) {
-		
-		if (isUserExist(user)) {
-			throw new InvalidParameterException("Cannot create an existing User!");
-		}
-		
-		return userRepository.save(user);
-	}
-
-	public boolean isUserExist(User user) {
-		
-		if(getUser(user.getUserId()) == null) {
-			return false;
-		}
-		return true;
-	}
 	
-	public Address findAddress(int id) {
-		return addressRepository.findByAddressId(id);
-	}
-
-	public User updateUser(User user) {
-		
-		if (isUserExist(user)) {
-			return userRepository.save(user);
-		}
-		throw new InvalidParameterException("User not found!");
-		
-	}
-
-	public void deleteUser(int userId) {
-		
-		User user = getUser(userId);
-		userRepository.delete(user);
-		
-	}
-
+	
 }

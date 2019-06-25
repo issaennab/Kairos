@@ -1,45 +1,42 @@
 package com.cki.kairos.profile.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "User")
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_Id")
 	private int userId;
 
-	@NotEmpty
-	@Column(name = "first_name")
-	private String firstName;
+	@Column(name = "handle")
+	private String handle;
 
-	@NotEmpty
-	@Column(name = "last_name")
-	private String lastName;
-
-	@NotEmpty
-	@Column(name = "email")
-	private String email;
-
-	@Column(name = "cell")
-	private String cellPhone;
-
-	@Column(name = "occupation")
-	private String occupation;
-
-	@OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_Id")
-	private Address address;
+	@Column(name = "open_Id")
+	private int openId;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_Id", referencedColumnName = "user_Id")
+	private List<Profile> profiles;
 
 	public int getUserId() {
 		return userId;
@@ -49,119 +46,33 @@ public class User {
 		this.userId = userId;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getHandle() {
+		return handle;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setHandle(String handle) {
+		this.handle = handle;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public int getOpenId() {
+		return openId;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setOpenId(int openId) {
+		this.openId = openId;
 	}
 
-	public String getEmail() {
-		return email;
+	public List<Profile> getProfiles() {
+		return profiles;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setProfiles(List<Profile> profiles) {
+		this.profiles = profiles;
 	}
-
-	public String getCellPhone() {
-		return cellPhone;
-	}
-
-	public void setCellPhone(String cellPhone) {
-		this.cellPhone = cellPhone;
-	}
-
-	public String getOccupation() {
-		return occupation;
-	}
-
-	public void setOccupation(String occupation) {
-		this.occupation = occupation;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", cellPhone=" + cellPhone + ", occupation=" + occupation + ", address=" + address + "]";
-	}
-
-	public static class UserBuilder {
-
-		private int userId;
-		private String firstName;
-		private String lastName;
-		private String email;
-		private String cellPhone;
-		private String occupation;
-		private Address address;
-
-		public UserBuilder setUserId(int userId) {
-			this.userId = userId;
-			return this;
-		}
-
-		public UserBuilder setFirstName(String firstName) {
-			this.firstName = firstName;
-			return this;
-		}
-
-		public UserBuilder setLastName(String lastName) {
-			this.lastName = lastName;
-			return this;
-		}
-
-		public UserBuilder setEmail(String email) {
-			this.email = email;
-			return this;
-		}
-
-		public UserBuilder setCellPhone(String cellPhone) {
-			this.cellPhone = cellPhone;
-			return this;
-		}
-
-		public UserBuilder setOccupation(String occupation) {
-			this.occupation = occupation;
-			return this;
-		}
-
-		public UserBuilder setAddress(Address address) {
-			this.address = address;
-			return this;
-		}
-
-		public User build() {
-
-			User user = new User();
-
-			user.setUserId(userId);
-			user.setFirstName(firstName);
-			user.setLastName(lastName);
-			user.setEmail(email);
-			user.setCellPhone(cellPhone);
-			user.setOccupation(occupation);
-			user.setAddress(address);
-
-			return user;
-		}
-	}
-
+//
+//	@Override
+//	public String toString() {
+//		return "User [userId=" + userId + ", handle=" + handle + ", openId=" + openId + ", profiles=" + profiles + "]";
+//	}
+	
 }
