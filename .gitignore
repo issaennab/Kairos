@@ -54,3 +54,10 @@ nb-configuration.xml
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+
+#gradle
+.gradle
+/build/
+
+# Cache of project
+.gradletasknamecache
